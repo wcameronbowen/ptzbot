@@ -1,4 +1,5 @@
 import socket
+import time
 socket.setdefaulttimeout(5)
 
 def openConnection(host, port, command):
@@ -7,6 +8,17 @@ def openConnection(host, port, command):
         s.connect((host, port))
         s.send(bytes.fromhex(command))
         r = s.recv(1024)
+
+#        #checking response
+#        if r.hex()[0:2] == "90" and r.hex()[4:6] == "FF":
+#            print(r.hex())
+#            print("command received")
+#        else:
+#            print(r.hex())
+#            print(r.hex()[0:2])
+#            print(r.hex()[5:7])
+#            print("something failed")
+    time.sleep(2)
     return(r)
 
 def recallPreset(host, port, presetNumber):
